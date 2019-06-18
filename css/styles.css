@@ -1,9 +1,13 @@
 html,
 body {
-  height: 100%;
+    height: 100%;
+}
+
+.sidebar {
+    float: left;
+    width: 250px;
 }
 
 #map {
     height: 100%;
-    width: 100%;
 }
