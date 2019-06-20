@@ -9,11 +9,9 @@
     </head>
     <body>
         <aside class="sidebar">
-            <input type="text" placeholder="Search the neighborhood">
-            <ul class="list">
-                <li>First place</li>
-                <li>Second place</li>
-                <li>Third place</li>
+            <input type="text" placeholder="Search the neighborhood" data-bind="textInput: filter, valueUpdate: 'afterkeydown'">
+            <ul data-bind="foreach: filteredPlaces">
+                <li data-bind="text: name, click: showInfo"></li>
             </ul>
         </aside>
         <div id="map"></div>
