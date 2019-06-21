@@ -18,10 +18,10 @@ var Place = function(name, position, fsid) {
         var infoWindowContent = "<h3>"+this.name+"</h3>";
         infoWindow.setContent(infoWindowContent+"<div>Fetching information...</div>");
 
-        var url = "https://api.foursquare.com/v2/venues/"+this.fsid
-            +"?client_id=2WF30CMX1YRYLGYIT0O30YGXMRILD4RMONZQK2VW1GGF1NUJ"
-            +"&client_secret=KHZ55DPWALRNWRO51302OJSS43PCFUTR51IA0MUV5SSIPKLF"
-            +"&v=20190621";
+        // var url = "https://api.foursquare.com/v2/venues/"+this.fsid
+        //     +"?client_id=2WF30CMX1YRYLGYIT0O30YGXMRILD4RMONZQK2VW1GGF1NUJ"
+        //     +"&client_secret=KHZ55DPWALRNWRO51302OJSS43PCFUTR51IA0MUV5SSIPKLF"
+        //     +"&v=20190621";
         $.getJSON(url)
             .done(function(json) {
                 var venue = json.response.venue;
@@ -93,6 +93,16 @@ function init() {
         new Place("Gasômetro Plant", {lat: -30.035143496634777, lng: -51.240882275997535}, "4b2e2a95f964a5201cdd24e3"),
     ];
     ko.applyBindings(new ViewModel(places));
+
+    $(".sidebar ul").on("click tap", function() {
+        $(".sidebar").toggleClass("open");
+        $(".menu-toggle").toggleClass("open");
+    });
+
+    $(".menu-toggle").on("click tap", function() {
+        $(".sidebar").toggleClass("open");
+        $(".menu-toggle").toggleClass("open");
+    });
 }
 
 function initFailed() {

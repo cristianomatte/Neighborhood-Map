@@ -8,12 +8,13 @@
         <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
-        <aside class="sidebar">
+        <div class="menu-toggle"></div>
+        <nav class="sidebar">
             <input type="text" placeholder="Search the neighborhood" data-bind="textInput: filter, valueUpdate: 'afterkeydown'">
             <ul data-bind="foreach: filteredPlaces">
                 <li data-bind="text: name, click: showInfo"></li>
             </ul>
-        </aside>
+        </nav>
         <div id="map"></div>
 
         <script src="js/lib/jquery-3.4.1.min.js"></script>
