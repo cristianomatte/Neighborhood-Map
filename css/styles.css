@@ -11,8 +11,12 @@ body {
     top: 50%;
     z-index: 1;
     transition-duration: 0.5s;
-    background-color: white;
-    border-radius: 0 50% 50% 0;
+    background-color: #45494E;
+    border-radius: 50%;
+    background-image: url("../assets/arrow.png");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .sidebar {
@@ -23,11 +27,15 @@ body {
     top: 0;
     z-index: 1;
     transition-duration: 0.5s;
-    background-color: white;
+    background-color: #45494E;
 }
 
 .open {
     transform: translateX(250px);
+}
+
+.menu-toggle.open {
+    transform: translateX(250px) rotate(180deg);
 }
 
 #map {
