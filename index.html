@@ -10,7 +10,9 @@
     <body>
         <div class="menu-toggle"></div>
         <nav class="sidebar">
-            <input type="text" placeholder="Search the neighborhood" data-bind="textInput: filter, valueUpdate: 'afterkeydown'">
+            <div class="searchbar-container">
+                <input type="text" class="searchbar" placeholder="Search the neighborhood" data-bind="textInput: filter, valueUpdate: 'afterkeydown'">
+            </div>
             <ul data-bind="foreach: filteredPlaces">
                 <li data-bind="text: name, click: showInfo"></li>
             </ul>

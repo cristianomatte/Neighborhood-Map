@@ -1,6 +1,12 @@
 html,
 body {
+    box-sizing: border-box;
     height: 100%;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+    font-family: "Helvetica Neue", helvetica, verdana, sans-serif;
 }
 
 .menu-toggle {
@@ -11,7 +17,7 @@ body {
     top: 50%;
     z-index: 1;
     transition-duration: 0.5s;
-    background-color: #45494E;
+    background-color: rgb(70,74,77);
     border-radius: 50%;
     background-image: url("../assets/arrow.png");
     background-size: 20px;
@@ -27,7 +33,15 @@ body {
     top: 0;
     z-index: 1;
     transition-duration: 0.5s;
-    background-color: #45494E;
+    background-color: rgb(70,74,77);
+    overflow: auto;
+}
+
+.sidebar ul {
+    list-style: none;
+    color: white;
+    line-height: 40px;
+    padding: 0;
 }
 
 .open {
@@ -38,11 +52,33 @@ body {
     transform: translateX(250px) rotate(180deg);
 }
 
+.searchbar-container {
+    background-color:rgb(40,44,47);
+    text-align: center;
+}
+
+.searchbar {
+    margin: 15px 0;
+    width: 230px;
+    height: 40px;
+    padding: 10px;
+}
+
+.sidebar li {
+    padding: 0 15px;
+}
+
+.sidebar li:hover {
+    background-color:rgb(40,44,47);
+	cursor: pointer;
+	font-weight: bold;
+}
+
 #map {
     height: 100%;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 650px) {
     .menu-toggle {
         display: none;
     }
