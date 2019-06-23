@@ -1,6 +1,7 @@
 var map;
 var infoWindow;
 
+// A model that holds information for each place
 var Place = function(name, position, fsid) {
     this.name = name;
     this.position = position;
@@ -12,16 +13,18 @@ var Place = function(name, position, fsid) {
     });
 
     this.showInfo = function() {
+        // Animates the marker
         this.marker.setAnimation(google.maps.Animation.BOUNCE);
         setTimeout(function(){ this.marker.setAnimation(null); }.bind(this), 500);
 
         var infoWindowContent = "<h3>"+this.name+"</h3>";
         infoWindow.setContent(infoWindowContent+"<div>Fetching information...</div>");
 
-        // var url = "https://api.foursquare.com/v2/venues/"+this.fsid
-        //     +"?client_id=2WF30CMX1YRYLGYIT0O30YGXMRILD4RMONZQK2VW1GGF1NUJ"
-        //     +"&client_secret=KHZ55DPWALRNWRO51302OJSS43PCFUTR51IA0MUV5SSIPKLF"
-        //     +"&v=20190621";
+        // Fetches information about the place from Foursquare API
+        var url = "https://api.foursquare.com/v2/venues/"+this.fsid
+            +"?client_id=2WF30CMX1YRYLGYIT0O30YGXMRILD4RMONZQK2VW1GGF1NUJ"
+            +"&client_secret=KHZ55DPWALRNWRO51302OJSS43PCFUTR51IA0MUV5SSIPKLF"
+            +"&v=20190621";
         $.getJSON(url)
             .done(function(json) {
                 var venue = json.response.venue;
@@ -30,7 +33,7 @@ var Place = function(name, position, fsid) {
                     return;
                 }
 
-                infoWindowContent += "<style>a {display: block;}</style>"
+                // Build the info window content with the place's contact information
                 if (venue.contact.formattedPhone) {
                     infoWindowContent += "<p>Phone: "+venue.contact.formattedPhone+"</p>";
                 }
@@ -48,6 +51,7 @@ var Place = function(name, position, fsid) {
                 }
             }.bind(this))
             .fail(function() {
+                // Display an error message on infow window in case of error
                 infoWindowContent += "<p>Failed to fetch information about this place. Try again later.</p>";
             }.bind(this))
             .always(function() {
@@ -60,6 +64,7 @@ var Place = function(name, position, fsid) {
     this.marker.addListener('click', this.showInfo.bind(this));
 }
 
+// Knockout's ViewModel
 var ViewModel = function(places) {
     this.filter = ko.observable("");
     this.places = ko.observableArray(places);
@@ -81,6 +86,7 @@ function init() {
     });
     infoWindow = new google.maps.InfoWindow({});
 
+    // Initial set of places with its names, positions and foursquare ids
     var places = [
         new Place("Beira-Rio Stadium", {lat: -30.065253864184932, lng: -51.23587800048611}, "4b7dd2cff964a520ead62fe3"),
         new Place("Arena do Grêmio", {lat: -29.973729615823974, lng: -51.196223254122714}, "54bac14f498e0b8a26d7e819"),
@@ -92,8 +98,12 @@ function init() {
         new Place("Public Market", {lat: -30.02752939776655, lng: -51.227893126881966}, "4b073237f964a52063f922e3"),
         new Place("Gasômetro Plant", {lat: -30.035143496634777, lng: -51.240882275997535}, "4b2e2a95f964a5201cdd24e3"),
     ];
-    ko.applyBindings(new ViewModel(places));
 
+    // Init the view model with the places and bind it
+    var viewModel = new ViewModel(places);
+    ko.applyBindings(viewModel);
+
+    // Add responsive functionality to show and hide the sidebar
     $(".sidebar ul").on("click tap", function() {
         $(".sidebar").toggleClass("open");
         $(".menu-toggle").toggleClass("open");
