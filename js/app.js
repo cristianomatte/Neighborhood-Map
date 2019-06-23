@@ -49,6 +49,7 @@ var Place = function(name, position, fsid) {
                 if (venue.url) {
                     infoWindowContent += "<p><a href="+venue.url+">Website</a></p>";
                 }
+                infoWindowContent += "<i>Information retrieved from <a href=\"https://foursquare.com/\">Foursquare</a>.</i>"
             }.bind(this))
             .fail(function() {
                 // Display an error message on infow window in case of error
